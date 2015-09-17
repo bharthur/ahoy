@@ -7,7 +7,7 @@ module Ahoy
       Ahoy::VisitProperties::LOCATION_KEYS.each do |key|
         if visit.respond_to?(:"#{key}=")
           valu = deckhand.send(key)
-          valu = valu.encode('UTF-8') if valu.class.to_s == "String"
+          valu = valu.force_encoding('iso-8859-1').encode('utf-8') if valu.class.to_s == "String"
           visit.send(:"#{key}=", valu)
         end
       end; visit.save!
